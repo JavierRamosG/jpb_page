@@ -45,24 +45,24 @@
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">JPB</h1>
+        <img src="assets/img/logo.png" alt="">
+        <!-- <h1 class="sitename">JPB</h1> -->
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="index.html">Inicio<br></a></li>
-          <li><a href="noticias.html">Noticias</a></li>
-          <li class="dropdown"><a href="#"><span>Nuestro Colegio</span> <i
+          <li class="dropdown"><a href="#" class="active"><span>Nuestro Colegio</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="historia.html">Historia</a></li>
               <li><a href="estatuto.html">Estatuto</a></li>
               <li><a href="himno.html">Himno</a></li>
-              <li><a href="organigrama.html">Organigrama</a></li>
+              <li><a href="organigrama.html">Comité</a></li>
             </ul>
           </li>
-          <li><a href="inscripcion.html" class="active">Inscripción</a></li>
+          <li><a href="noticias.html">Noticias</a></li>
+          <li><a href="inscripcion.html">Inscripción</a></li>
           <li><a href="contact.html">Contacto</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -267,19 +267,23 @@
     document.getElementById("start-registration").addEventListener("click", function (e) {
       e.preventDefault(); // Evitar recarga de página
       registrationContent.innerHTML = `
-        <h3>1. Verificación de exalumno</h3>
-        <p>A continuación ingresa tu DNI para validar tu información</p>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <input type="text" id="dni-input" class="form-control" placeholder="Ingresa tu DNI" />
-          <button id="validate-dni" class="btn btn-success"><i class="bi bi-search"></i></button>
-        </div>
-        <p id="error-message" style="color: red; display: none;">El DNI ingresado no pertenece al colegio.</p>
-      `;
+            <h3>1. Verificación de exalumno</h3>
+            <p>A continuación ingresa tu DNI para validar tu información</p>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" id="dni-input" class="form-control" placeholder="Ingresa tu DNI" />
+                <button id="validate-dni" class="btn btn-success"><i class="bi bi-search"></i></button>
+            </div>
+            <div id="error-container" style="margin-top: 10px; display: none;">
+                <p id="error-message" style="color: red;">El DNI ingresado no pertenece al colegio.</p>
+              <p>Si no puedes inscribirte, <a href="contact.html" id="contact-link" style="color: #006c32; text-decoration: underline;">contáctanos.</a> </p>
+            </div>
+        `;
 
       // Agregar evento al botón de validación
       document.getElementById("validate-dni").addEventListener("click", function () {
         const dniInput = document.getElementById("dni-input").value;
-        const errorMessage = document.getElementById("error-message");
+        const errorContainer = document.getElementById("error-container");
+        // const errorMessage = document.getElementById("error-message");
 
         if (dniInput === validDNI) {
           registrationContent.innerHTML = `
@@ -382,7 +386,7 @@
             });
           });
         } else {
-          errorMessage.style.display = "block";
+          errorContainer.style.display = "block";
         }
       });
     });

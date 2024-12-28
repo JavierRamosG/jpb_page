@@ -906,7 +906,7 @@ section,
 
 .hero:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 60%);
+  background: color-mix(in srgb, var(--background-color), transparent 45%);
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -1246,11 +1246,27 @@ section,
 /*--------------------------------------------------------------
 # Trainers Index Section
 --------------------------------------------------------------*/
+/* Trainers Index Section */
+.trainers-index {
+  display: flex;
+  flex-wrap: wrap;
+  /* Permite que los elementos se ajusten a nuevas filas */
+  justify-content: center;
+  /* Centra los elementos horizontalmente */
+  gap: 20px;
+  /* Espaciado uniforme entre los elementos */
+}
+
 .trainers-index .member {
   background-color: var(--surface-color);
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border: 0px solid color-mix(in srgb, var(--default-color), transparent 90%);
   text-align: center;
   margin-bottom: 20px;
+  flex: 1 1 calc(33.333% - 20px);
+  /* Ocupa un tercio del ancho disponible */
+  max-width: calc(33.333% - 20px);
+  box-sizing: border-box;
+  /* Para que los márgenes y bordes no afecten el ancho */
 }
 
 .trainers-index .member img {
@@ -1298,6 +1314,16 @@ section,
   font-size: 18px;
   margin: 0 2px;
 }
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .trainers-index .member {
+    flex: 1 1 100%;
+    /* Los elementos ocupan todo el ancho */
+    max-width: 100%;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # About Us Section
@@ -1985,4 +2011,53 @@ section,
 /* Mostrar el overlay cuando el modal esté activo */
 .overlay.show {
   display: block;
+}
+
+
+
+
+
+
+
+/* WhatsApp Button */
+.whatsapp-button {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  /* Misma alineación horizontal que el botón de scroll top */
+  bottom: 75px;
+  /* Posición encima del botón de scroll top */
+  z-index: 99999;
+  /* Asegura que el botón esté encima de otros elementos */
+  background-color: #25D366;
+  /* Color verde de WhatsApp */
+  width: 44px;
+  /* Igual tamaño que el botón de scroll top */
+  height: 44px;
+  /* Igual tamaño que el botón de scroll top */
+  border-radius: 50%;
+  /* Hace el botón circular */
+  transition: all 0.4s;
+  /* Suaviza las transiciones */
+}
+
+.whatsapp-button i {
+  font-size: 24px;
+  /* Tamaño del ícono, igual al de scroll top */
+  color: white;
+  /* Color del ícono */
+  line-height: 0;
+}
+
+.whatsapp-button:hover {
+  background-color: #1EBE56;
+  /* Cambia ligeramente el color al pasar el cursor */
+}
+
+.whatsapp-button.active {
+  visibility: visible;
+  opacity: 1;
+  bottom: 75px;
+  /* Hace visible el botón cuando está activo, como el scroll top */
 }

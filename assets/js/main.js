@@ -6,7 +6,7 @@
 * License: https://bootstrapmade.com/license/
 */
 
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -50,7 +50,7 @@
    * Toggle mobile nav dropdowns
    */
   document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
+    navmenu.addEventListener('click', function (e) {
       e.preventDefault();
       this.parentNode.classList.toggle('active');
       this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
@@ -69,15 +69,24 @@
   }
 
   /**
-   * Scroll top button
+   * Scroll top and WhatsApp button
    */
   let scrollTop = document.querySelector('.scroll-top');
+  let whatsappButton = document.querySelector('.whatsapp-button');
 
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+  function toggleButtons() {
+    if (scrollTop && whatsappButton) {
+      if (window.scrollY > 100) {
+        scrollTop.classList.add('active');
+        whatsappButton.classList.add('active');
+      } else {
+        scrollTop.classList.remove('active');
+        whatsappButton.classList.remove('active');
+      }
     }
   }
+
+  // Acción del botón de Scroll Top
   scrollTop.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({
@@ -86,8 +95,12 @@
     });
   });
 
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
+  // Eventos para controlar la visibilidad de los botones
+  window.addEventListener('load', toggleButtons);
+  document.addEventListener('scroll', toggleButtons);
+
+
+
 
   /**
    * Animation on scroll function and init
@@ -118,7 +131,7 @@
    * Init swiper sliders
    */
   function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
+    document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
       let config = JSON.parse(
         swiperElement.querySelector(".swiper-config").innerHTML.trim()
       );
