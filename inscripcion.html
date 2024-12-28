@@ -267,14 +267,14 @@
     document.getElementById("start-registration").addEventListener("click", function (e) {
       e.preventDefault(); // Evitar recarga de página
       registrationContent.innerHTML = `
-      <h3>1. Verificación de exalumno</h3>
-      <p>A continuación ingresa tu DNI para validar tu información</p>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <input type="text" id="dni-input" class="form-control" placeholder="Ingresa tu DNI" />
-        <button id="validate-dni" class="btn btn-success"><i class="bi bi-search"></i></button>
-      </div>
-      <p id="error-message" style="color: red; display: none;">El DNI ingresado no pertenece al colegio.</p>
-    `;
+        <h3>1. Verificación de exalumno</h3>
+        <p>A continuación ingresa tu DNI para validar tu información</p>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <input type="text" id="dni-input" class="form-control" placeholder="Ingresa tu DNI" />
+          <button id="validate-dni" class="btn btn-success"><i class="bi bi-search"></i></button>
+        </div>
+        <p id="error-message" style="color: red; display: none;">El DNI ingresado no pertenece al colegio.</p>
+      `;
 
       // Agregar evento al botón de validación
       document.getElementById("validate-dni").addEventListener("click", function () {
@@ -283,87 +283,102 @@
 
         if (dniInput === validDNI) {
           registrationContent.innerHTML = `
-          <h3>2. Pago de la cuota de inscripción</h3>
-          <p>Realiza el pago de 10,00 S/. a la cuenta que aparece a continuación:</p>
-          <ul>
-            <li><i class="bi bi-bank"></i> <strong>Banco:</strong> Banco de Crédito del Perú (BCP)</li>
-            <li><i class="bi bi-credit-card"></i> <strong>Número de cuenta:</strong> 192-12345678-0-99</li>
-            <li><i class="bi bi-wallet2"></i> <strong>Código de cuenta interbancaria (CCI):</strong> 00219212345678099</li>
-            <li><i class="bi bi-person-circle"></i> <strong>Titular:</strong> Asociación de Exalumnos Colegio José Pardo y Barreda</li>
-          </ul>
-          <p>Una vez realizado el pago, guarda tu comprobante para adjuntarlo en el formulario de inscripción.</p>
-          <a href="#" id="next-step" class="btn btn-success"><span>Siguiente</span> <i class="bi bi-chevron-right"></i></a>
-        `;
+            <h3>¡Felicitaciones!</h3>
+            <p>Hemos verificado que eres un pardino. Estos son los datos en nuestro sistema:</p>
+            <ul>
+              <li><i class="bi bi-person-circle"></i> <strong>Nombre completo:</strong> Javier Ramos González</li>
+              <li><i class="bi bi-credit-card"></i> <strong>DNI:</strong> 19978095</li>
+              <li><i class="bi bi-calendar-check"></i> <strong>Promoción:</strong> 1998</li>
+            </ul>
+            <button id="continue-registration" class="btn btn-success">Continuar con la inscripción</button>
+          `;
 
-          // Evento para el botón "Siguiente" del paso 2
-          document.getElementById("next-step").addEventListener("click", function (e) {
+          // Agregar evento al botón "Continuar con la inscripción"
+          document.getElementById("continue-registration").addEventListener("click", function (e) {
             e.preventDefault();
             registrationContent.innerHTML = `
-            <h3>3. Formulario de inscripción</h3>
-            <p>A continuación llena el formulario con tu información:</p>
-            <form id="registration-form">
-              <div class="mb-3">
-                <label for="full-name" class="form-label">Nombre Completo</label>
-                <input type="text" class="form-control" id="full-name" placeholder="Ingresa tu nombre completo" required>
-              </div>
-              <div class="mb-3">
-                <label for="dni" class="form-label">DNI</label>
-                <input type="text" class="form-control" id="dni" value="${validDNI}" readonly>
-              </div>
-              <div class="mb-3">
-                <label for="birth-date" class="form-label">Fecha de Nacimiento</label>
-                <input type="date" class="form-control" id="birth-date" required>
-              </div>
-              <div class="mb-3">
-                <label for="gender" class="form-label">Género</label>
-                <select class="form-control" id="gender" required>
-                  <option value="">Selecciona</option>
-                  <option value="male">Masculino</option>
-                  <option value="female">Femenino</option>
-                  <option value="other">Otro</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="promotion" class="form-label">Promoción</label>
-                <input type="number" class="form-control" id="promotion" placeholder="Año de tu promoción (ej: 2005)" required>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Correo</label>
-                <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required>
-              </div>
-              <div class="mb-3">
-                <label for="phone" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="phone" placeholder="Ingresa tu número telefónico" required>
-              </div>
-              <div class="mb-3">
-                <label for="country" class="form-label">País</label>
-                <input type="text" class="form-control" id="country" placeholder="Ingresa tu país de residencia" required>
-              </div>
-              <div class="mb-3">
-                <label for="city" class="form-label">Ciudad</label>
-                <input type="text" class="form-control" id="city" placeholder="Ingresa tu ciudad de residencia" required>
-              </div>
-              <div class="mb-3">
-                <label for="address" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="address" placeholder="Ingresa tu dirección" required>
-              </div>
-              <div class="mb-3">
-                <label for="payment-proof" class="form-label">Adjuntar comprobante de pago</label>
-                <input type="file" class="form-control" id="payment-proof" required>
-              </div>
-              <button type="submit" class="btn btn-success">Enviar</button>
-            </form>
-                    `;
-
-            // Evento para el envío del formulario
-            document.getElementById("registration-form").addEventListener("submit", function (e) {
-              e.preventDefault(); // Evitar recarga de página
-              registrationContent.innerHTML = `
-              <h3>4. Evaluación del comité</h3>
-              <p>¡Tus datos han sido enviados correctamente! 
-                <br><br>
-                Muy pronto recibirás la aprobación por parte de nuestro comité de evaluación. Por favor queda atento a tu correo.</p>
+              <h3>2. Pago de la cuota de inscripción</h3>
+              <p>Realiza el pago de 10,00 S/. a la cuenta que aparece a continuación:</p>
+              <ul>
+                <li><i class="bi bi-bank"></i> <strong>Banco:</strong> Banco de Crédito del Perú (BCP)</li>
+                <li><i class="bi bi-credit-card"></i> <strong>Número de cuenta:</strong> 192-12345678-0-99</li>
+                <li><i class="bi bi-wallet2"></i> <strong>Código de cuenta interbancaria (CCI):</strong> 00219212345678099</li>
+                <li><i class="bi bi-person-circle"></i> <strong>Titular:</strong> Asociación de Exalumnos Colegio José Pardo y Barreda</li>
+              </ul>
+              <p>Una vez realizado el pago, guarda tu comprobante para adjuntarlo en el formulario de inscripción.</p>
+              <a href="#" id="next-step" class="btn btn-success"><span>Siguiente</span> <i class="bi bi-chevron-right"></i></a>
             `;
+
+            // Evento para el botón "Siguiente" del paso 2
+            document.getElementById("next-step").addEventListener("click", function (e) {
+              e.preventDefault();
+              registrationContent.innerHTML = `
+                <h3>3. Formulario de inscripción</h3>
+                <p>A continuación llena el formulario con tu información:</p>
+                <form id="registration-form">
+                  <div class="mb-3">
+                    <label for="full-name" class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-control" id="full-name" value="Javier Ramos González" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="dni" value="${validDNI}" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="birth-date" class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" id="birth-date" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="gender" class="form-label">Género</label>
+                    <select class="form-control" id="gender" required>
+                      <option value="">Selecciona</option>
+                      <option value="male">Masculino</option>
+                      <option value="female">Femenino</option>
+                      <option value="other">Otro</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="promotion" class="form-label">Promoción</label>
+                    <input type="number" class="form-control" id="promotion" value="1998" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="phone" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Ingresa tu número telefónico" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="country" class="form-label">País</label>
+                    <input type="text" class="form-control" id="country" placeholder="Ingresa tu país de residencia" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="city" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="city" placeholder="Ingresa tu ciudad de residencia" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="address" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="address" placeholder="Ingresa tu dirección" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="payment-proof" class="form-label">Adjuntar comprobante de pago</label>
+                    <input type="file" class="form-control" id="payment-proof" required>
+                  </div>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </form>
+              `;
+
+              // Evento para el envío del formulario
+              document.getElementById("registration-form").addEventListener("submit", function (e) {
+                e.preventDefault(); // Evitar recarga de página
+                registrationContent.innerHTML = `
+                  <h3>4. Evaluación del comité</h3>
+                  <p>¡Tus datos han sido enviados correctamente! 
+                    <br><br>
+                    Muy pronto recibirás la aprobación por parte de nuestro comité de evaluación. Por favor queda atento a tu correo.</p>
+                `;
+              });
             });
           });
         } else {
@@ -372,6 +387,7 @@
       });
     });
   </script>
+
 
 </body>
 
