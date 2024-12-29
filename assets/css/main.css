@@ -1926,17 +1926,22 @@ section,
   /* Add your styles here */
 }
 
+/*--------------------------------------------------------------
+# Modal
+--------------------------------------------------------------*/
+
 .login-modal {
   position: fixed;
   top: 0;
-  right: -100%;
-  width: 400px;
+  right: calc(-100%);
+  width: 90%;
+  max-width: 400px;
   height: 100vh;
   background-color: #ffffff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   transition: right 0.4s ease-in-out;
-  z-index: 1050;
+  z-index: 9999;
 }
 
 .login-modal.show {
@@ -2015,7 +2020,9 @@ section,
 
 
 
-
+/*--------------------------------------------------------------
+# Whatsapp Button 
+--------------------------------------------------------------*/
 
 
 
