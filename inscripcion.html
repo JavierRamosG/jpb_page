@@ -68,10 +68,32 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="#">Iniciar Sesión</a>
+      <a class="btn-getstarted" id="open-login-modal">Iniciar Sesión</a>
 
     </div>
   </header>
+
+  <!-- Modal de inicio de sesión -->
+  <div id="login-modal" class="login-modal">
+    <div class="login-modal-content">
+      <button class="close-modal" id="close-login-modal">&times;</button>
+      <h3>Iniciar Sesión</h3>
+      <form id="login-form">
+        <div class="mb-3">
+          <label for="login-email" class="form-label">Correo Electrónico</label>
+          <input type="email" class="form-control" id="login-email" placeholder="Ingresa tu correo" required>
+        </div>
+        <div class="mb-3">
+          <label for="login-password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="login-password" placeholder="Ingresa tu contraseña" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
 
   <main class="main">
 
@@ -395,6 +417,34 @@
           errorContainer.style.display = "block";
         }
       });
+    });
+  </script>
+
+  <script>
+    // Obtener los elementos del DOM
+    const openModalBtn = document.getElementById("open-login-modal");
+    const closeModalBtn = document.getElementById("close-login-modal");
+    const loginModal = document.getElementById("login-modal");
+    const overlay = document.getElementById("overlay");
+
+    // Abrir el modal al hacer clic en "Iniciar Sesión"
+    openModalBtn.addEventListener("click", function () {
+      loginModal.classList.add("show");
+      overlay.classList.add("show");
+    });
+
+    // Cerrar el modal al hacer clic en el botón de cerrar
+    closeModalBtn.addEventListener("click", function () {
+      loginModal.classList.remove("show");
+      overlay.classList.remove("show");
+    });
+
+    // Cerrar el modal al hacer clic fuera del contenido del modal (opcional)
+    window.addEventListener("click", function (e) {
+      if (e.target === overlay) {
+        loginModal.classList.remove("show");
+        overlay.classList.remove("show");
+      }
     });
   </script>
 
